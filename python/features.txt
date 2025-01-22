@@ -1,0 +1,17 @@
+Feature: Moving forwardScenario: Facing North  Given  The rover has position (x=4, y=2) 
+and facing North  When  Rove moves forward  Then The rover has position (x=4, y=3) and facing North
+
+Feature: Moving forwardScenario: Facing South  Given  The rover has position (x=4, y=2) 
+and facing South  When  Rove moves forward  Then The rover has position (x=4, y=1) and facing South
+
+Feature: Moving forwardScenario: Facing East  Given  The rover has position (x=4, y=2) 
+and facing East  When  Rove moves forward  Then The rover has position (x=5, y=2) and facing East
+
+Feature: Moving forwardScenario: Facing West  Given  The rover has position (x=4, y=2) 
+and facing West  When  Rove moves forward  Then The rover has position (x=3, y=2) and facing West
+
+
+
+
+
+
