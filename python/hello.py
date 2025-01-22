@@ -1,32 +1,56 @@
+class Grid:
+    def __init__(self, size=100):
+        self.size = size
+        self.half_size = size // 2
+
+    def normalize_coordinate(self, coord):
+        if coord >= self.half_size:
+            return coord - self.size
+        elif coord < -self.half_size:
+            return coord + self.size
+        return coord
+
 class Position:
     def __init__(self, x, y):
         self.x = x
         self.y = y
 
+
 class Rover:
-    def __init__(self, position, direction):
+    def __init__(self, position, direction, grid=None):
         self.position = position
         self.direction = direction
+        self.grid = grid if grid is not None else Grid()
     
     def move_forward(self):
+        new_position = Position(self.position.x, self.position.y)
         if self.direction == "North":
-            self.position.y += 1
+            new_position.y += 1
         elif self.direction == "South":
-            self.position.y -= 1
+            new_position.y -= 1
         elif self.direction == "East":
-            self.position.x += 1
+            new_position.x += 1
         elif self.direction == "West":
-            self.position.x -= 1
-    
+            new_position.x -= 1
+
+        new_position.x = self.grid.normalize_coordinate(new_position.x)
+        new_position.y = self.grid.normalize_coordinate(new_position.y)
+        self.position = new_position
+        
     def move_backward(self):
+        new_position = Position(self.position.x, self.position.y)
         if self.direction == "North":
-            self.position.y -= 1
+            new_position.y -= 1
         elif self.direction == "South":
-            self.position.y += 1
+            new_position.y += 1
         elif self.direction == "East":
-            self.position.x -= 1
+            new_position.x -= 1
         elif self.direction == "West":
-            self.position.x += 1
+            new_position.x += 1
+
+        new_position.x = self.grid.normalize_coordinate(new_position.x)
+        new_position.y = self.grid.normalize_coordinate(new_position.y)
+        self.position = new_position
     
     def turn_left(self):
         if self.direction == "North":
