@@ -28,4 +28,24 @@ class Rover:
             self.position.x -= 1
         elif self.direction == "West":
             self.position.x += 1
+    
+    def turn_left(self):
+        if self.direction == "North":
+            self.direction = "West"
+        elif self.direction == "West":
+            self.direction = "South"
+        elif self.direction == "South":
+            self.direction = "East"
+        elif self.direction == "East":
+            self.direction = "North"
+    
+    def turn_right(self):
+        if self.direction == "North":
+            self.direction = "East"
+        elif self.direction == "East":
+            self.direction = "South"
+        elif self.direction == "South":
+            self.direction = "West"
+        elif self.direction == "West":
+            self.direction = "North"
 

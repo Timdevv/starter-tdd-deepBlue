@@ -10,6 +10,64 @@ and facing East  When  Rove moves forward  Then The rover has position (x=5, y=2
 Feature: Moving forwardScenario: Facing West  Given  The rover has position (x=4, y=2) 
 and facing West  When  Rove moves forward  Then The rover has position (x=3, y=2) and facing West
 
+------------------------------
+
+Feature: Moving backwardScenario: Facing North  Given  The rover has position (x=4, y=2) 
+and facing North  When  Rove moves backward  Then The rover has position (x=4, y=1) and facing North
+
+Feature: Moving backwardScenario: Facing South  Given  The rover has position (x=4, y=2) 
+and facing South  When  Rove moves backward  Then The rover has position (x=4, y=3) and facing South
+
+Feature: Moving backwardScenario: Facing East  Given  The rover has position (x=4, y=2) 
+and facing East  When  Rove moves backward  Then The rover has position (x=3, y=2) and facing East
+
+Feature: Moving backwardScenario: Facing West  Given  The rover has position (x=4, y=2) 
+and facing West  When  Rove moves backward  Then The rover has position (x=5, y=2) and facing West
+
+
+--------------
+
+Feature: Facing direction
+Scenario: Turn right from North
+  Given The rover is facing North
+  When Rover turns right
+  Then The rover is facing East
+
+Feature: Turn right from East  
+  Given The rover is facing East
+  When Rover turns right
+  Then The rover is facing South
+
+Feature: Turn right from South
+  Given The rover is facing South 
+  When Rover turns right
+  Then The rover is facing West
+
+Feature: Turn right from West
+  Given The rover is facing West
+  When Rover turns right
+  Then The rover is facing North
+
+Feature: Turn left from North
+  Given The rover is facing North
+  When Rover turns left
+  Then The rover is facing West
+
+Feature: Turn left from West
+  Given The rover is facing West
+  When Rover turns left
+  Then The rover is facing South
+
+Feature: Turn left from South
+  Given The rover is facing South
+  When Rover turns left
+  Then The rover is facing East
+
+Feature: Turn left from East
+  Given The rover is facing East
+  When Rover turns left
+  Then The rover is facing North
+
 
 
 
