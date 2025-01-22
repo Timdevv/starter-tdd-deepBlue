@@ -1,117 +1,60 @@
-Feature: Moving forward
-Scenario: Facing North
-  Given The rover has position (x=4, y=2) and facing North
-  When Rover moves forward
-  Then The rover has position (x=4, y=3) and facing North
+# Mars Rover Test Cases
 
-Scenario: Facing South
-  Given The rover has position (x=4, y=2) and facing South
-  When Rover moves forward
-  Then The rover has position (x=4, y=1) and facing South
+## Movement Tests
 
-Scenario: Facing East
-  Given The rover has position (x=4, y=2) and facing East
-  When Rover moves forward
-  Then The rover has position (x=5, y=2) and facing East
+### Forward Movement
+| Initial Position | Direction | Final Position | Direction (unchanged) |
+|-----------------|-----------|----------------|---------------------|
+| (4, 2)         | North     | (4, 3)        | North              |
+| (4, 2)         | South     | (4, 1)        | South              |
+| (4, 2)         | East      | (5, 2)        | East               |
+| (4, 2)         | West      | (3, 2)        | West               |
 
-Scenario: Facing West
-  Given The rover has position (x=4, y=2) and facing West
-  When Rover moves forward
-  Then The rover has position (x=3, y=2) and facing West
+### Backward Movement
+| Initial Position | Direction | Final Position | Direction (unchanged) |
+|-----------------|-----------|----------------|---------------------|
+| (4, 2)         | North     | (4, 1)        | North              |
+| (4, 2)         | South     | (4, 3)        | South              |
+| (4, 2)         | East      | (3, 2)        | East               |
+| (4, 2)         | West      | (5, 2)        | West               |
 
-Feature: Moving backward
-Scenario: Facing North
-  Given The rover has position (x=4, y=2) and facing North
-  When Rover moves backward
-  Then The rover has position (x=4, y=1) and facing North
+## Rotation Tests
 
-Scenario: Facing South
-  Given The rover has position (x=4, y=2) and facing South
-  When Rover moves backward
-  Then The rover has position (x=4, y=3) and facing South
+### Turn Left
+| Initial Direction | Final Direction |
+|------------------|-----------------|
+| North            | West            |
+| West             | South           |
+| South            | East            |
+| East             | North           |
 
-Scenario: Facing East
-  Given The rover has position (x=4, y=2) and facing East
-  When Rover moves backward
-  Then The rover has position (x=3, y=2) and facing East
+### Turn Right
+| Initial Direction | Final Direction |
+|------------------|-----------------|
+| North            | East            |
+| East             | South           |
+| South            | West            |
+| West             | North           |
 
-Scenario: Facing West
-  Given The rover has position (x=4, y=2) and facing West
-  When Rover moves backward
-  Then The rover has position (x=5, y=2) and facing West
+## Grid Boundary Tests
+| Initial Position | Direction | Final Position | Direction (unchanged) |
+|-----------------|-----------|----------------|---------------------|
+| (49, 0)        | East      | (-50, 0)      | East               |
+| (-50, 0)       | West      | (49, 0)       | West               |
+| (0, 49)        | North     | (0, -50)      | North              |
+| (0, -50)       | South     | (0, 49)       | South              |
 
-Feature: Turning
-Scenario: Turn right from North
-  Given The rover is facing North
-  When Rover turns right
-  Then The rover is facing East
+## Command Sequence Tests
 
-Scenario: Turn right from East
-  Given The rover is facing East
-  When Rover turns right
-  Then The rover is facing South
+### Multiple Valid Commands
+| Initial State           | Commands | Final State            |
+|------------------------|----------|------------------------|
+| (0, 0), facing North   | "FFRFF"  | (2, 2), facing East   |
 
-Scenario: Turn right from South
-  Given The rover is facing South
-  When Rover turns right
-  Then The rover is facing West
-
-Scenario: Turn right from West
-  Given The rover is facing West
-  When Rover turns right
-  Then The rover is facing North
-
-Scenario: Turn left from North
-  Given The rover is facing North
-  When Rover turns left
-  Then The rover is facing West
-
-Scenario: Turn left from West
-  Given The rover is facing West
-  When Rover turns left
-  Then The rover is facing South
-
-Scenario: Turn left from South
-  Given The rover is facing South
-  When Rover turns left
-  Then The rover is facing East
-
-Scenario: Turn left from East
-  Given The rover is facing East
-  When Rover turns left
-  Then The rover is facing North
-
-Feature: Execute multiple commands
-Scenario: Execute array of commands
-  Given The rover has position (x=0, y=0) and facing North
-  When Rover executes commands "FFRFF"
-  Then The rover has position (x=2, y=2) and facing East
-
-Scenario: Execute array with invalid commands
-  Given The rover has position (x=0, y=0) and facing North
-  When Rover executes commands "FFX1FF"
-  Then The rover has position (x=0, y=4) and facing North
-
-Feature: Grid bound
-Scenario: Move beyond right grid boundary
-  Given The rover has position (x=49, y=0) and facing East
-  When Rover moves forward
-  Then The rover has position (x=-50, y=0) and facing East
-
-Scenario: Move beyond left grid boundary  
-  Given The rover has position (x=-50, y=0) and facing West
-  When Rover moves forward
-  Then The rover has position (x=49, y=0) and facing West
-
-Scenario: Move beyond top grid boundary
-  Given The rover has position (x=0, y=49) and facing North  
-  When Rover moves forward
-  Then The rover has position (x=0, y=-50) and facing North
-
-Scenario: Move beyond bottom grid boundary
-  Given The rover has position (x=0, y=-50) and facing South
-  When Rover moves forward
-  Then The rover has position (x=0, y=49) and facing South
+### Commands with Invalid Characters
+| Initial State           | Commands | Final State            | Notes |
+|------------------------|----------|------------------------|-------|
+| (0, 0), facing North   | "FFX1FF" | (0, 4), facing North  | Invalid characters 'X' and '1' are ignored |
 
 
 
