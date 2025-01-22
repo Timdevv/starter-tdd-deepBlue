@@ -21,6 +21,7 @@ class Rover:
         self.position = position
         self.direction = direction
         self.grid = grid if grid is not None else Grid()
+        self.directions = ["North", "East", "South", "West"]
     
     def move_forward(self):
         new_position = Position(self.position.x, self.position.y)
@@ -53,24 +54,12 @@ class Rover:
         self.position = new_position
     
     def turn_left(self):
-        if self.direction == "North":
-            self.direction = "West"
-        elif self.direction == "West":
-            self.direction = "South"
-        elif self.direction == "South":
-            self.direction = "East"
-        elif self.direction == "East":
-            self.direction = "North"
+        current_index = self.directions.index(self.direction)
+        self.direction = self.directions[(current_index - 1) % 4]
     
     def turn_right(self):
-        if self.direction == "North":
-            self.direction = "East"
-        elif self.direction == "East":
-            self.direction = "South"
-        elif self.direction == "South":
-            self.direction = "West"
-        elif self.direction == "West":
-            self.direction = "North"
+        current_index = self.directions.index(self.direction)
+        self.direction = self.directions[(current_index + 1) % 4]
 
     def execute_commands(self, commands):
         command_map = {
