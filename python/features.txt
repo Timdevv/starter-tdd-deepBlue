@@ -68,6 +68,18 @@ Feature: Turn left from East
   When Rover turns left
   Then The rover is facing North
 
+-----------------------------
+
+Feature: Execute multiple commands
+Scenario: Execute array of commands
+  Given The rover has position (x=0, y=0) and facing North
+  When Rover executes commands "FFRFF"
+  Then The rover has position (x=2, y=2) and facing East
+
+Scenario: Execute array with invalid commands
+  Given The rover has position (x=0, y=0) and facing North  
+  When Rover executes commands "FFX1FF"
+  Then The rover has position (x=0, y=4) and facing North
 
 
 

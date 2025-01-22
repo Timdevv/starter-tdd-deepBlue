@@ -1,4 +1,3 @@
-
 class Position:
     def __init__(self, x, y):
         self.x = x
@@ -48,4 +47,18 @@ class Rover:
             self.direction = "West"
         elif self.direction == "West":
             self.direction = "North"
+
+    def execute_commands(self, commands):
+        command_map = {
+            'F': self.move_forward,
+            'B': self.move_backward,
+            'L': self.turn_left,
+            'R': self.turn_right
+        }
+        
+        for command in commands:
+            if command in command_map:
+                command_map[command]()
+            else:
+                print(f"Commande invalide et ignorée: {command}")
 
